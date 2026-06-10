@@ -1,0 +1,8 @@
+flask
+flask_sqlalchemy
+flask_login
+argon2-cffi
+pyotp
+qrcode
+pillow
+gunicorn

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2 class="mb-3">Login Logs</h2>
+  {% if logs %}
+    <div class="card p-3">
+      <table class="table table-striped mb-0">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Status</th>
+            <th>IP Address</th>
+            <th>Timestamp</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for log in logs %}
+            <tr>
+              <td>{{ log.username or 'Unknown' }}</td>
+              <td>{{ log.status }}</td>
+              <td>{{ log.ip_address or 'N/A' }}</td>
+              <td>{{ log.login_time.strftime('%Y-%m-%d %H:%M') if log.login_time else 'N/A' }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="card p-3 text-muted">No login activity has been recorded yet.</div>
+  {% endif %}
+{% endblock %}

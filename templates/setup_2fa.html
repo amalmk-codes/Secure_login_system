@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <h2 class="mb-3">Set up 2FA</h2>
+          {% if backup_codes %}
+            <div class="alert alert-warning">
+              Save these backup codes in a safe place. Each code can be used once if you lose access to your authenticator app.
+            </div>
+            <ul class="list-group mb-3">
+              {% for code in backup_codes %}
+                <li class="list-group-item font-monospace">{{ code }}</li>
+              {% endfor %}
+            </ul>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Continue to dashboard</a>
+          {% else %}
+            <p class="text-muted">Scan the QR code with your authenticator app and enter the code below.</p>
+            <div class="row align-items-center">
+              <div class="col-md-6 text-center">
+                {% if qr_code %}
+                  <img src="{{ qr_code }}" alt="2FA QR Code" class="img-fluid border rounded p-2 bg-white">
+                {% endif %}
+              </div>
+              <div class="col-md-6">
+                <form method="post">
+                  <div class="mb-3">
+                    <label class="form-label">Verification Code</label>
+                    <input type="text" class="form-control" name="otp" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary w-100">Enable 2FA</button>
+                </form>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

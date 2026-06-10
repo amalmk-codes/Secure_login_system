@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="mb-1">Dashboard</h2>
+      <p class="text-muted mb-0">Welcome back, {{ user.username }}.</p>
+    </div>
+    <a class="btn btn-outline-primary" href="{{ url_for('setup_2fa') }}">Manage 2FA</a>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <div class="card p-3 h-100">
+        <h5>Account Status</h5>
+        <p class="mb-0">Your account is active and protected by secure session handling.</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card p-3 h-100">
+        <h5>Last Login</h5>
+        <p class="mb-0">{{ last_login }}</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card p-3 h-100">
+        <h5>2FA Status</h5>
+        <p class="mb-0">{% if user.is_2fa_enabled %}Enabled{% else %}Not enabled yet{% endif %}</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card p-3 h-100">
+        <h5>Failed Attempts</h5>
+        <p class="mb-0">{{ failed_attempts }}</p>
+      </div>
+    </div>
+  </div>
+{% endblock %}
